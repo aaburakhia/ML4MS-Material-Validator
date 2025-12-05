@@ -71,7 +71,7 @@ df_materials = load_database()
 class MaterialService:
     def __init__(self, api_key):
         self.api_key = api_key
-        self.llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=api_key, temperature=0)
+        self.llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash-001", google_api_key=api_key, temperature=0)
 
     def search_database(self, query: str) -> Optional[MaterialRecord]:
         if df_materials.empty: return None
