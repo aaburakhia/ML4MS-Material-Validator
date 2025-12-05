@@ -1,7 +1,7 @@
 streamlit
-langchain
-langchain-google-genai
-pymatgen
 pandas
 rapidfuzz
-pydantic
+pymatgen
+langchain
+langchain-google-genai
+langchain-core
