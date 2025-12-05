@@ -1,3 +1,7 @@
-altair
-pandas
 streamlit
+langchain
+langchain-google-genai
+pymatgen
+pandas
+rapidfuzz
+pydantic
