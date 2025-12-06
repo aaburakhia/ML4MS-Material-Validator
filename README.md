@@ -1,8 +1,8 @@
 # 🛡️ ML4MS: NACE Compliance Agent
-[![arXiv](https://img.shields.io/badge/arXiv-2512.00977-b31b1b.svg)](https://arxiv.org/abs/2512.00977)
-
 **Provenance-Enforced AI for Sour Service Material Selection**
 
+
+[![arXiv](https://img.shields.io/badge/arXiv-2512.00977-b31b1b.svg)](https://arxiv.org/abs/2512.00977)
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://huggingface.co/spaces/aaburakhia/ML4MS-Material-Validator)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/)
@@ -38,9 +38,62 @@ graph TD
     G --> H["Generate Hash Signature"]
     H --> I["Display Result"]
 ```
+---
+
+## 3. Key Features
+
+### 🧠 Hybrid RAG Architecture
+The agent does not blindly trust AI. It uses a **tiered lookup strategy**:
+1.  **Tier 1 (Trusted):** Searches an internal CSV database (simulating an ERP system).
+2.  **Tier 2 (Fallback):** If the material is unknown (e.g., "Unobtainium"), it uses Gemini 1.5 Pro to estimate the chemistry, but flags it as **"Low Confidence"**.
+
+### ⚛️ Deterministic Physics Engine
+Unlike standard Chatbots, this tool **does not guess numbers**.
+*   It parses the chemical string (e.g., `Ni58Cr21...`) using **Pymatgen**.
+*   It calculates **Molecular Weight** and **PREN** based on atomic masses.
+*   **Result:** 100% mathematical accuracy, zero hallucinations.
+
+### 🛡️ The Render Gate (Digital MTR)
+Every calculation generates a **SHA-256 Cryptographic Hash**.
+*   The UI will **refuse to display** any engineering verdict unless the data payload matches its signature.
+*   This creates a digital audit trail equivalent to a physical **Material Test Report (MTR)**.
+
+### 👷 Human-in-the-Loop Verification
+Asset Integrity requires human oversight. The app allows the engineer to **Edit the Chemical Formula** before the calculation runs, ensuring the simulation matches the specific heat number of the steel being purchased.
 
 ---
-## 📚 Scientific References
+
+## 4. Installation & Usage
+
+You can run this agent locally on your own machine.
+
+### Prerequisites
+*   Python 3.10+
+*   A Google Gemini API Key (Free)
+
+### Setup Guide
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/aaburakhia/ML4MS-Material-Validator.git
+cd ML4MS-Material-Validator
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Set your API Key (Linux/Mac)
+export GOOGLE_API_KEY="your_actual_api_key_here"
+
+# 3. Set your API Key (Windows PowerShell)
+$env:GOOGLE_API_KEY="your_actual_api_key_here"
+
+# 4. Launch the App
+streamlit run app.py
+```
+
+---
+
+## 5. Scientific References
 
 This project is an implementation of the **"Render Gate"** architecture described in:
 
